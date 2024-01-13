@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack counter</title>
+</head>
+<body>
+    <header class="Name">
+        <h2>Stack counter</h2>
+    </header>
+
+    <main>
+        <p id="description">Enter the number of items:</p>
+        <!--<input id='input_number' type="number">-->
+        <strong class="magic_text">
+            <p id="items">...</p>
+            <p id="rs">a</p>
+            <p id="ri">a</p>
+        </strong>
+        
+        <div class="sheet">
+            <input type="button" id="b1" value="1">
+            <input type="button" id="b2" value="2">
+            <input type="button" id="b3" value="3">
+            <br>
+            <input type="button" id="b4" value="4">
+            <input type="button" id="b5" value="5">
+            <input type="button" id="b6" value="6">
+            <br>
+            <input type="button" id="b7" value="7">
+            <input type="button" id="b8" value="8">
+            <input type="button" id="b9" value="9">
+            <br>
+            <input type="button" id="bce" value="Clear all">
+            <input type="button" id="b0" value="0">
+            <input type="button" id="bc" value="Delete one">
+        </div>
+    </main>    
+</body>
+
+
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
+<script>    
+    //код срабоет после полной загрузки страницы
+    document.addEventListener('DOMContentLoaded', function() { 
+        document.body.classList.add('ready');
+    });
+
+    // переменные с ссылками на текст на странице
+    var p_stack = document.getElementById('rs');
+    var p_items = document.getElementById('ri');
+    
+    // дрисня для считывания нажатия на кнопки
+    document.getElementById("b1").addEventListener('click', function() {on_button_click(1)});
+    document.getElementById("b2").addEventListener('click', function() {on_button_click(2)});
+    document.getElementById("b3").addEventListener('click', function() {on_button_click(3)});
+    document.getElementById("b4").addEventListener('click', function() {on_button_click(4)});
+    document.getElementById("b5").addEventListener('click', function() {on_button_click(5)});
+    document.getElementById("b6").addEventListener('click', function() {on_button_click(6)});
+    document.getElementById("b7").addEventListener('click', function() {on_button_click(7)});
+    document.getElementById("b8").addEventListener('click', function() {on_button_click(8)});
+    document.getElementById("b9").addEventListener('click', function() {on_button_click(9)});
+    document.getElementById("b0").addEventListener('click', function() {on_button_click(0)});
+    document.getElementById("bc").addEventListener('click', function() {on_button_click(-1)});
+    document.getElementById("bce").addEventListener('click', function() {on_button_click(-2)});
+
+    // переменная отвечающая за состояние текста с количеством стаков и предметов
+    var magic_blurred = true;
+
+    rs.style.color = 'white';
+    ri.style.color = 'white';
+
+    // срабатывает при обновлении значения в строке ввода
+    function on_button_click(q) {
+        if(q > -1) {
+            console.log(q);
+        }
+        else if(q == -1) {
+            console.log('pop()');
+        }
+        else if(q == -2) {
+            console.log('all cleared');
+        }
+        // количество стаков (изначально всегда 0), после расчетов число увеличиватется
+    };
+
+    function name() {
+        var stack = 0;
+
+        rs.style.color = 'black';
+        ri.style.color = 'black';
+
+        // если поле ввода пустое - текст магически пропадет
+        if(input.value == '') {
+            document.body.classList.remove('magic_undest');
+            document.body.classList.add('magic_dest');
+            magic_blurred = true;
+        }
+        // если в поле ввода цифра меньше 64
+        else if(input.value < 64) {
+            // если текст пропадал ранее - его нужно вернуть
+            if(magic_blurred == true) {
+                document.body.classList.remove('magic_dest');
+                document.body.classList.add('magic_undest');
+                magic_blurred = false;
+            }
+
+            rs.textContent = ('Stack: 0');
+            ri.textContent = ('Items: ' + input.value);
+        }
+        // если в поле ввода цифра больше 64
+        else {
+            // если текст пропадал ранее - его нужно вернуть
+            if(magic_blurred == true) {
+                document.body.classList.remove('magic_dest');
+                document.body.classList.add('magic_undest');
+                magic_blurred = false;  
+            }
+
+            // фукнция где: if q > 64 : stack++; q -= 64;
+            q = recount(input.value);
+            rs.textContent = (stack < 2 ? 'Stack: ' + stack : 'Stacks: ' + stack);
+            ri.textContent = ('Items: ' + q);
+        }
+
+        // та самая функиция пересчета стаков
+        function recount(int) {
+            if(int >= 64) {
+                stack ++;
+                int -= 64;
+            }
+            if (int >= 64) {
+                return recount(int)
+            }
+            else {
+                return int
+            }
+        }
+    };
+</script>
+
+<!-- стили -->
+<style>
+    body {
+        margin: 0% 0% 0% 0%;
+
+        font-family: 'Minecraftia', sans-serif;
+    }
+    #description {
+        font-size: 30px;
+    }
+
+    header {
+        display: flex; 
+        flex-direction: row;
+
+        justify-content: center;
+        align-items: center;
+    }
+    header h2 {
+        font-size: 40px;
+    }
+
+    main {
+        margin-top: 5%;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    /*.sheet {
+        
+    }*/
+
+    #b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9, #b0, #bc, #bce {
+        border: 1px solid black;
+        flex-basis: 33%;
+
+        width: 130px;
+        height: 70px;
+
+        margin: 5px 5px 5px 5px;
+
+        font-family: 'Minecraftia', sans-serif; /* <- остановился тут, нужно сделать стиль для кнопок, + их главный функционал */
+
+        word-wrap: break-word;
+        white-space: pre-wrap; 
+    }
+
+    /* появление текст */
+    .magic_undest .magic_text {
+        animation: text-focus-in 0.25s linear both;
+    }
+    @keyframes text-focus-in {
+      0% {
+        filter: blur(12px);
+        opacity: 0;
+      }
+      100% {
+        filter: blur(0px);
+        opacity: 1;
+      }
+    }
+
+    /* исчезновение текста */
+    .magic_dest .magic_text {
+        animation: text-blur-out 0.2s linear both;
+    }
+    @keyframes text-blur-out {
+      0% {
+        filter: blur(0.01);
+      }
+      100% {
+        filter: blur(12px) opacity(0%);
+      }
+    }
+
+    /* анимация названия сайта при открытии страницы */
+    .ready .Name{
+	    animation: tracking-in-expand_1 1s ;
+    }
+    @keyframes tracking-in-expand_1 {
+      0% {
+        letter-spacing: -0.7em;
+        opacity: 0;
+      }
+      40% {
+        opacity: 0.6;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* анимация текста "Enter the number of items:" при открытии страницы */
+    .ready main {
+        animation: tracking-in-expand_2 1s ;
+    }
+    @keyframes tracking-in-expand_2 {
+      0% {
+        letter-spacing: -0.5em;
+        opacity: 0;
+      }
+      40% {
+        opacity: 0.6;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+</style>
+
+</html>
