@@ -48,9 +48,13 @@
         document.body.classList.add('ready');
     });
 
+    // переменная с актуальным количеством предметов из строки
+    var items_count = 0;
+
     // переменные с ссылками на текст на странице
-    var p_stack = document.getElementById('rs');
-    var p_items = document.getElementById('ri');
+    var p_items = document.getElementById('items');
+    var p_rs = document.getElementById('rs');
+    var p_ri = document.getElementById('ri');
     
     // дрисня для считывания нажатия на кнопки
     document.getElementById("b1").addEventListener('click', function() {on_button_click(1)});
@@ -69,37 +73,65 @@
     // переменная отвечающая за состояние текста с количеством стаков и предметов
     var magic_blurred = true;
 
+    items.style.color = 'white';
     rs.style.color = 'white';
     ri.style.color = 'white';
 
     // срабатывает при обновлении значения в строке ввода
+
+    
     function on_button_click(q) {
+
+        // дабавление нового символа в конец стороки
         if(q > -1) {
-            console.log(q);
+            if(p_items.textContent == '...') {
+                p_items.textContent = 'All: ' + q;
+            }
+            else {
+                p_items.textContent += q;
+            }
         }
+        // удаления только последего символа строки
         else if(q == -1) {
-            console.log('pop()');
+            if(p_items.textContent.length == 1) {
+                p_items.textContent = '...';
+            }
+            else {
+                qq = p_items.textContent;
+                new_qq = qq.slice(0, -1);
+                p_items.textContent =  new_qq;
+            }
+            
         }
+        // полная очистка строки
         else if(q == -2) {
-            console.log('all cleared');
+            p_items.textContent = '...';
         }
         // количество стаков (изначально всегда 0), после расчетов число увеличиватется
+
+        name();
     };
 
     function name() {
         var stack = 0;
 
+        items.style.color = 'black';
         rs.style.color = 'black';
         ri.style.color = 'black';
 
+        // переменная с общим количеством предметов
+        items_count = Number(p_items.textContent.substr(5));
+
         // если поле ввода пустое - текст магически пропадет
-        if(input.value == '') {
+        if(p_items.textContent == '...') {
             document.body.classList.remove('magic_undest');
             document.body.classList.add('magic_dest');
             magic_blurred = true;
         }
+        
         // если в поле ввода цифра меньше 64
-        else if(input.value < 64) {
+        else if(items_count < 64) {
+            
             // если текст пропадал ранее - его нужно вернуть
             if(magic_blurred == true) {
                 document.body.classList.remove('magic_dest');
@@ -107,11 +139,13 @@
                 magic_blurred = false;
             }
 
+            // изменить значение 2 строк результата
             rs.textContent = ('Stack: 0');
-            ri.textContent = ('Items: ' + input.value);
+            ri.textContent = ('Items: ' + items_count);
         }
         // если в поле ввода цифра больше 64
         else {
+            items_count = Number(p_items.textContent.substr(5));
             // если текст пропадал ранее - его нужно вернуть
             if(magic_blurred == true) {
                 document.body.classList.remove('magic_dest');
@@ -120,9 +154,11 @@
             }
 
             // фукнция где: if q > 64 : stack++; q -= 64;
-            q = recount(input.value);
+            q = recount(items_count);
+
+            // изменить значение 2 строк результата
             rs.textContent = (stack < 2 ? 'Stack: ' + stack : 'Stacks: ' + stack);
-            ri.textContent = ('Items: ' + q);
+            ri.textContent = ('Items left: ' + q);
         }
 
         // та самая функиция пересчета стаков
@@ -149,7 +185,8 @@
         font-family: 'Minecraftia', sans-serif;
     }
     #description {
-        font-size: 30px;
+        font-size: 15px;
+        color: rgb(163, 162, 162);
     }
 
     header {
@@ -185,7 +222,7 @@
 
         margin: 5px 5px 5px 5px;
 
-        font-family: 'Minecraftia', sans-serif; /* <- остановился тут, нужно сделать стиль для кнопок, + их главный функционал */
+        font-family: 'Minecraftia', sans-serif;
 
         word-wrap: break-word;
         white-space: pre-wrap; 
