@@ -81,10 +81,16 @@
     // срабатывает при нажатии кнопки
     function on_button_click(q) {
         document.getElementById(q).classList.add('scale-up-center');
+        document.getElementById('items').classList.add('scale-up-center');
+        document.getElementById('rs').classList.add('scale-up-center');
+        document.getElementById('ri').classList.add('scale-up-center');
 
         // Remove the class after the animation completes (0.1s)
         setTimeout(function () {
             document.getElementById(q).classList.remove('scale-up-center');
+            document.getElementById('items').classList.remove('scale-up-center');
+            document.getElementById('rs').classList.remove('scale-up-center');
+            document.getElementById('ri').classList.remove('scale-up-center');
         }, 100);
 
         // конструкция обратоки значений передаваемых кнопками
@@ -233,6 +239,8 @@
 
         word-wrap: break-word;
         white-space: pre-wrap; 
+
+        border-radius: 5px;
     }
 
     /* анимация нажатия кнопки */
