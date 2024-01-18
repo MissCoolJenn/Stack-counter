@@ -1,0 +1,160 @@
+body {
+    margin: 0% 0% 0% 0%;
+
+    font-family: 'Minecraftia', sans-serif;
+}
+#description {
+    font-size: 15px;
+    color: rgb(163, 162, 162);
+}
+
+header {
+    display: flex; 
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+}
+header h2 {
+    font-size: 40px;
+}
+
+main {
+    margin-top: 5%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+/*.sheet {
+    
+}*/
+
+#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9, #b0, #bc, #bce {
+    border: 1px solid black;
+    flex-basis: 33%;
+
+    width: 130px;
+    height: 70px;
+
+    margin: 5px 5px 5px 5px;
+
+    font-family: 'Minecraftia', sans-serif;
+
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+
+    border-radius: 5px;
+}
+
+.magic_text {
+
+    text-align: center;
+}
+
+/* анимация ошмбки изза слишком большого числа */
+.error_shake-horizontal {
+    animation: shake-horizontal 0.75s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(5px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  90% {
+    transform: translateX(-4px);
+  }
+}
+
+
+/* анимация нажатия кнопки */
+.scale-up-center {
+    animation: scale-up-center 0.1s linear both;
+}
+ @keyframes scale-up-center {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* появление текст */
+.magic_undest .magic_text {
+    animation: text-focus-in 0.25s linear both;
+}
+@keyframes text-focus-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+/* исчезновение текста */
+.magic_dest .magic_text {
+    animation: text-blur-out 0.2s linear both;
+}
+@keyframes text-blur-out {
+  0% {
+    filter: blur(0.01);
+  }
+  100% {
+    filter: blur(12px) opacity(0%);
+  }
+}
+
+/* анимация названия сайта при открытии страницы */
+.ready .Name{
+    animation: tracking-in-expand_1 1s ;
+}
+@keyframes tracking-in-expand_1 {
+  0% {
+    letter-spacing: -0.7em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* анимация текста "Enter the number of items:" при открытии страницы */
+.ready main {
+    animation: tracking-in-expand_2 1s ;
+}
+@keyframes tracking-in-expand_2 {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
