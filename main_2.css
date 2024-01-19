@@ -2,25 +2,32 @@ body {
     margin: 0% 0% 0% 0%;
 
     font-family: 'Minecraftia', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: bisque;
 }
 #description {
     font-size: 15px;
-    color: rgb(163, 162, 162);
+    color: rgb(191, 191, 191);
 }
 
 header {
-    display: flex; 
-    flex-direction: row;
-
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 header h2 {
     font-size: 40px;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 main {
     margin-top: 5%;
+    padding-bottom: 14px;
 
     display: flex;
     flex-direction: column;
@@ -28,9 +35,14 @@ main {
     align-items: center;
 }
 
-/*.sheet {
-    
-}*/
+header h2, main {
+    width: 470px;
+
+    background-color: white;
+
+    border: 1px solid black;
+    border-radius: 10px;
+}
 
 #b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9, #b0, #bc, #bce {
     border: 1px solid black;
@@ -50,11 +62,10 @@ main {
 }
 
 .magic_text {
-
     text-align: center;
 }
 
-/* анимация ошмбки изза слишком большого числа */
+/* анимация ошибки изза слишком большого числа */
 .error_shake-horizontal {
     animation: shake-horizontal 0.75s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
@@ -89,7 +100,7 @@ main {
 }
  @keyframes scale-up-center {
   0% {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
   100% {
     transform: scale(1);

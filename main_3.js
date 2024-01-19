@@ -23,7 +23,50 @@ document.getElementById("b8").addEventListener('click', function() {on_button_cl
 document.getElementById("b9").addEventListener('click', function() {on_button_click('b9')});
 document.getElementById("b0").addEventListener('click', function() {on_button_click('b0')});
 document.getElementById("bc").addEventListener('click', function() {on_button_click('bc')});
-document.getElementById("bce").addEventListener('click', function() {on_button_click('bce')}); // <- остановился тут (не запускактся анимация нажатия кнопки)
+document.getElementById("bce").addEventListener('click', function() {on_button_click('bce')});
+
+// дирсня для считывания нажатия на клавиатуру
+document.addEventListener('keydown', function() {
+    var button = null;
+    switch(event.keyCode) {
+        case 8:
+            button = 'bc';
+            break;
+        case 48:
+            button = 'b0';
+            break;
+        case 49:
+            button = 'b1';
+            break;
+        case 50:
+            button = 'b2';
+            break;
+        case 51:
+            button = 'b3';
+            break;
+        case 52:
+            button = 'b4';
+            break;
+        case 53:
+            button = 'b5';
+            break;
+        case 54:
+            button = 'b6';
+            break;
+        case 55:
+            button = 'b7';
+            break;
+        case 56:
+            button = 'b8';
+            break;
+        case 57:
+            button = 'b9';
+            break;
+    }
+    if(button !== null) {
+        on_button_click(button);
+    }
+});
 
 // переменная отвечающая за состояние текста с количеством стаков и предметов
 var magic_blurred = true;
@@ -63,7 +106,7 @@ function on_button_click(q) {
             p_items.textContent = '...';
             break;
         // удаления только последего символа строки
-        case 'bc': 
+        case 'bc' || 8: 
             if(p_items.textContent.substr(6) == '') {
                 p_items.textContent = '...';
             }
@@ -73,13 +116,23 @@ function on_button_click(q) {
                 p_items.textContent =  new_qq;
             }  
             break;
-        // дабавление нового символа в конец стороки
+        // добавление нового символа в конец стороки
         default: 
-            if(p_items.textContent == '...') {
-                p_items.textContent = 'All: ' + q.substr(1);
+            if(q in [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]) {
+                if(p_items.textContent == '...') {
+                    p_items.textContent = 'All: ' + q.substr(1);
+                }
+                else {
+                    p_items.textContent += q.substr(1);
+                }
             }
             else {
-                p_items.textContent += q.substr(1);
+                if(p_items.textContent == '...') {
+                    p_items.textContent = 'All: ' + q.substr(1);
+                }
+                else {
+                    p_items.textContent += q.substr(1);
+                }
             }
             break;
         }
