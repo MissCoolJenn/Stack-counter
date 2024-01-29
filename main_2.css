@@ -8,7 +8,9 @@ body {
     justify-content: center;
     align-items: center;
 
-    background-color: bisque;
+    background-image: url('white_background.png');
+    background-repeat: repeat;
+    /*background-color: bisque;*/
 }
 #description {
     font-size: 15px;
